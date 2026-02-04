@@ -2,7 +2,7 @@
 
 <div align="center">
 
-**An Intelligent CLI-Based File Management Assistant Powered by Google Gemini**
+**An Intelligent CLI-Based File Management Assistant Powered by Gemini Robot Pro**
 
 [![Python](https://img.shields.io/badge/Python-3.7%2B-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
@@ -375,7 +375,6 @@ copies or substantial portions of the Software.
 ## 📧 Contact & Support
 
 - **GitHub**: [@Nirmalakhadka18](https://github.com/Nirmalakhadka18)
-- **Repository**: [Gemini_Robot_Pro](https://github.com/Nirmalakhadka18/Gemini_Robot_Pro)
 - **Issues**: [Report a bug or request a feature](https://github.com/Nirmalakhadka18/Gemini_Robot_Pro/issues)
 
 ---
