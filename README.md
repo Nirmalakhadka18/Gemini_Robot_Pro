@@ -61,7 +61,7 @@ python main.py
 - *"Move all python files from downloads to the 'scripts' folder."*
 - *"Copy the error logs to the backup directory."*
 
-## Project Structure
+## Project Structure.
 
 - `main.py`: Entry point for the CLI application.
 - `llm_client.py`: Handles communication with the OpenRouter API.
