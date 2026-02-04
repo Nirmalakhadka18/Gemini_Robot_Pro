@@ -186,12 +186,4 @@ This project is open source and available under the **MIT License**.
 - **Repository**: [Gemini_Robot_Pro](https://github.com/Nirmalakhadka18/Gemini_Robot_Pro)
 - **Issues**: [Report a bug or request a feature](https://github.com/Nirmalakhadka18/Gemini_Robot_Pro/issues)
 
----
 
-<div align="center">
-
-**Made with ❤️ using Google Gemini AI**
-
-⭐ Star this repo if you find it helpful!
-
-</div>
