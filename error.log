@@ -1,0 +1,1 @@
+{'error': '400 Client Error: Bad Request for url: https://openrouter.ai/api/v1/chat/completions\nResponse Body: {"error":{"message":"google/gemini-1.5-pro is not a valid model ID","code":400},"user_id":"user_39CyTHWZXu3pOPJkgOODEvKuBDx"}'}
