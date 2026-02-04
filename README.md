@@ -405,6 +405,5 @@ Planned features for upcoming releases:
 
 <div align="center">
 
-**Version 1.0.0** | Made with ❤️ using Python 
 
 </div>
