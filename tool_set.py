@@ -2,7 +2,8 @@ import os
 import shutil
 import platform
 import fnmatch
-from typing import List, Dict
+import subprocess
+from typing import List, Dict, Union
 
 def get_system_info() -> str:
     """Returns a summary of the current system."""
@@ -102,6 +103,45 @@ def copy_files(source_paths: List[str], destination_folder: str) -> Dict[str, st
             
     return results
 
+def write_file(path: str, content: str) -> Dict[str, str]:
+    """
+    Writes content to a file. Overwrites if exists.
+    """
+    try:
+        path = os.path.abspath(path)
+        # Ensure parent directory exists
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        
+        with open(path, 'w', encoding='utf-8') as f:
+            f.write(content)
+        return {"success": f"File written to {path}", "error": None}
+    except Exception as e:
+        return {"success": None, "error": f"Failed to write to {path}: {e}"}
+
+def run_terminal_command(command: str) -> Dict[str, str]:
+    """
+    Runs a terminal command and returns stdout/stderr.
+    """
+    try:
+        # Safety: In a real app, strict allowlisting is needed.
+        # For this 'robot' tool, we allow commands but run in a subprocess.
+        result = subprocess.run(
+            command, 
+            shell=True, 
+            capture_output=True, 
+            text=True, 
+            timeout=120 # 2 minute timeout
+        )
+        return {
+            "stdout": result.stdout,
+            "stderr": result.stderr, 
+            "returncode": result.returncode
+        }
+    except subprocess.TimeoutExpired:
+        return {"stdout": "", "stderr": "Command timed out", "returncode": -1}
+    except Exception as e:
+        return {"stdout": "", "stderr": str(e), "returncode": -1}
+
 def get_tools_definition():
     """Returns the JSON schema for these tools to be passed to the LLM."""
     return [
@@ -167,6 +207,44 @@ def get_tools_definition():
                         }
                     },
                     "required": ["source_paths", "destination_folder"]
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "write_file",
+                "description": "Write text content to a file. Useful for creating websites, code files, or docs.",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "path": {
+                            "type": "string",
+                            "description": "Absolute or relative path to the file."
+                        },
+                        "content": {
+                            "type": "string",
+                            "description": "The text content to write."
+                        }
+                    },
+                    "required": ["path", "content"]
+                }
+            }
+        },
+        {
+            "type": "function",
+            "function": {
+                "name": "run_terminal_command",
+                "description": "Execute a terminal command (e.g., git push, npm install).",
+                "parameters": {
+                    "type": "object",
+                    "properties": {
+                        "command": {
+                            "type": "string",
+                            "description": "The command line string to execute."
+                        }
+                    },
+                    "required": ["command"]
                 }
             }
         }

@@ -41,5 +41,23 @@ class TestToolSet(unittest.TestCase):
         self.assertTrue(os.path.exists(os.path.join(dest, "doc3.pdf")))
         self.assertFalse(os.path.exists(os.path.join(self.test_dir, "doc1.pdf")))
 
+    def test_write_file(self):
+        print("\nTesting write_file...")
+        path = os.path.join(self.test_dir, "new_code.py")
+        content = "print('hello world')"
+        result = tool_set.write_file(path, content)
+        
+        self.assertIsNone(result["error"])
+        self.assertTrue(os.path.exists(path))
+        with open(path, "r") as f:
+            self.assertEqual(f.read(), content)
+
+    def test_run_command(self):
+        print("\nTesting run_terminal_command...")
+        # Simple echo command
+        result = tool_set.run_terminal_command("echo hello from robot")
+        self.assertEqual(result["returncode"], 0)
+        self.assertIn("hello from robot", result["stdout"])
+
 if __name__ == '__main__':
     unittest.main()
